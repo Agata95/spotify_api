@@ -36,6 +36,12 @@ public class Account {
     @Cascade(value = org.hibernate.annotations.CascadeType.DETACH)
     private Set<AccountRole> accountRoles;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "account")
+    @Cascade(value = org.hibernate.annotations.CascadeType.DELETE)
+    private Set<Artist> artists;
+
     private boolean locked;
 
     public boolean isAdmin() {
